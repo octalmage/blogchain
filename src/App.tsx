@@ -138,11 +138,12 @@ class App extends React.Component<any, any> {
   render() {
     return (
       <div className="App">
+      <h1>Blogchain</h1>
       {this.state.posts.map((post, i) => {
-        return <span key={i}><h1>{post.title}</h1><p>{post.content}</p></span>;
+        return <span key={i}><h2>{post.title}</h2><p>{post.content}</p></span>;
       })}
       {!this.state.posts.length &&
-        <h1>Loading...</h1>
+        <h2>Loading...</h2>
       }
       </div>
     );
