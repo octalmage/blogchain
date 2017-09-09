@@ -1,19 +1,44 @@
 import * as React from 'react';
+import Web3 from 'web3';
 import contract from 'truffle-contract';
-import * as test from '../test.json';
-import BlogContract from '../build/contracts/Blog.json';
+import getWeb3 from './utils/getWeb3';
+import * as BlogContract from '../build/contracts/Blog.json';
 import './App.css';
 
-const logo = require('./logo.svg');
+interface ContractFunction {
+  call: Function;
+}
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    console.og(test);
+interface BlogInstance {
+  getBlogPostsCount: ContractFunction;
+  getBlogPost: ContractFunction;
+}
+
+interface Post {
+  title: string;
+  content: string;
+}
+
+interface State {
+  posts: Post[];
+  web3: Web3;
+}
+
+class App extends React.Component<any, any> {
+  state: State;
+  constructor() {
+    super();
+
     this.state = {
       posts: [],
-      web3: null
-    }
+      web3: null,
+    };
+
+    this.instantiateContract = this.instantiateContract.bind(this);
+    this.addBlogPost = this.addBlogPost.bind(this);
+    this.convertPost = this.convertPost.bind(this);
+    this.convertPosts = this.convertPosts.bind(this);
+    this.componentWillMount = this.componentWillMount.bind(this);
   }
 
   componentWillMount() {
@@ -21,16 +46,26 @@ class App extends React.Component {
     // See utils/getWeb3 for more info.
 
     getWeb3
-    .then(results => {
-      this.setState({
-        web3: results.web3,
+    .then((results) => {
+      this.setState({ web3: results.web3 }, () => {
+        // On new post reload the blog posts.
+        this.state.web3.eth.filter('latest', (error) => {
+          if (!error) {
+            this.instantiateContract();
+          } else {
+            console.error(error);
+          }
+        });
+
+        // Instantiate contract once web3 provided.
+        this.instantiateContract();
+
+        // this.addBlogPost('Test', 'This is a test.');
       });
-      // Instantiate contract once web3 provided.
-      this.instantiateContract();
     })
-    .catch(() => {
-      console.log('Error finding web3.')
-    })
+    .catch((err) => {
+      console.log('Error finding web3.');
+    });
   }
 
   instantiateContract() {
@@ -40,74 +75,75 @@ class App extends React.Component {
     * Normally these functions would be called in the context of a
     * state management library, but for convenience I've placed them here.
     */
-    const blog = contract(BlogContract)
-    blog.setProvider(this.state.web3.currentProvider)
+    const blog = contract(BlogContract);
+    blog.setProvider(this.state.web3.currentProvider);
 
-    // Declaring this for later so we can chain functions on SimpleStorage.
-    var blogInstance;
+    // Declaring this for later so we can chain functions.
+    let blogInstance: BlogInstance;
 
     // Get accounts.
-    this.state.web3.eth.getAccounts((error, accounts) => {
-      blog.deployed().then((instance) => {
+    this.state.web3.eth.getAccounts((error: string, accounts: Array<string>) => {
+      blog.deployed().then((instance: BlogInstance) => {
         blogInstance = instance;
 
-        // Stores a given value, 5 by default.
         return blogInstance.getBlogPostsCount.call();
-      }).then(function(count) {
-        console.log(count);
-        var tasks = [];
-        for (i = 0; i < count; i++) {
+      }).then((count: Number) => {
+        var tasks: Object[] = [];
+        for (let i = 0; i < count; i++) {
           tasks.push(blogInstance.getBlogPost.call(i));
         }
         return Promise.all(tasks);
-      }).then(this.convertPosts).then(function(posts) {
-        this.setState({ posts });
+      }).then(this.convertPosts).then((posts: Array<Post>) => {
+        this.setState({ posts: posts.reverse() });
       });
-    })
+    });
   }
 
-  addBlogPost(title, content) {
+  addBlogPost(title: string, content: string) {
     var blogInstance;
-
-    this.state.web3.eth.getAccounts(function(error, accounts) {
+    this.state.web3.eth.getAccounts((error, accounts) => {
       if (error) {
         console.log(error);
       }
 
-      const blog = contract(BlogContract)
-      blog.setProvider(this.state.web3.currentProvider)
+      const blog = contract(BlogContract);
+      blog.setProvider(this.state.web3.currentProvider);
 
       var account = accounts[0];
 
-      blog.deployed().then(function(instance) {
+      blog.deployed().then((instance) => {
         blogInstance = instance;
 
         return blogInstance.addBlogPost(title, content, { from: account });
-      }).then(function(result) {
+      }).then((result) => {
         // return App.showBlogPosts();
-      }).catch(function(err) {
+      }).catch((err) => {
         console.log(err.message);
       });
     });
   }
 
-  convertPost(post) {
+  // Data off the chain is in binary format, need to convert.
+  convertPost(post: Post) {
     return {
       title: this.state.web3.toAscii(post[0]),
       content: this.state.web3.toAscii(post[1]),
     };
   }
 
+  convertPosts(posts: Array<Post>) {
+    return posts.map(this.convertPost);
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+      {this.state.posts.map((post, i) => {
+        return <span key={i}><h1>{post.title}</h1><p>{post.content}</p></span>;
+      })}
+      {!this.state.posts.length &&
+        <h1>Loading...</h1>
+      }
       </div>
     );
   }
