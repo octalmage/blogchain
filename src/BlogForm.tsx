@@ -27,6 +27,7 @@ class BlogForm extends React.Component<any, any> {
   handleSubmit(event) {
     event.preventDefault();
     this.props.onSubmit(this.state.titleValue, this.state.commentValue);
+    this.setState({ titleValue: '', commentValue: '' })
   }
 
   render() {
