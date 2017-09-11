@@ -141,22 +141,30 @@ class App extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="App row center-md">
-        <div className="col-xs-12">
-          <h1>Blogchain</h1>
+      <div className="App">
+        <div className="row">
+        <div className="col-md-12">
+          <div className="header">
+            <h1>Blogchain</h1>
+          </div>
+        </div>
         </div>
         {this.state.posts.map((post, i) => {
         return <span key={i}>
-          <div className="postTitle col-xs-12">
-            <h2>{post.title}</h2>
+          <div className="col-md-12">
+            <div className="PostTitle">
+              <h2>{post.title}</h2>
+            </div>
           </div>
-          <div className="postContent col-xs-12">
-            <p>{post.content}</p>
+          <div className="col-md-12">
+            <div className="PostContent">
+              <p>{post.content}</p>
+            </div>
           </div>
           </span>;
           })}
           {!this.state.posts.length &&
-          <h2>Loading...</h2>
+          <div className="Loading"><h2>Loading...</h2></div>
         }
         <BlogForm onSubmit={this.addBlogPost} />
         </div>

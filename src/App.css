@@ -11,6 +11,18 @@ h2 {
     font-weight: 400;
 }
 
+.PostTitle {
+    background-color: #CCC;
+    width: 100%;
+}
+.PostTitle h2 {
+    font-family: 'Roboto Condensed';
+    font-weight: 400;
+}
+
+.FormField {
+    margin: 1em;
+}
 .App {
   text-align: center;
 }

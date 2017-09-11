@@ -31,11 +31,20 @@ class BlogForm extends React.Component<any, any> {
 
   render() {
     return (
+      <div className="BlogForm row center-sm">
+      <div className="col-sm-12">
       <form onSubmit={this.handleSubmit}>
+        <div className="FormField">
+        <p>Post Title: </p>
         <input type='text' name='titleValue' value={this.state.titleValue} onChange={this.handleChange} />
-        <input type='text' name='commentValue' value={this.state.commentValue} onChange={this.handleChange} />
+        </div>
+        <div className="FormField">
+        <p>Post Content: </p><input type='text' name='commentValue' value={this.state.commentValue} onChange={this.handleChange} />
+        </div>
         <input type='submit' value='Submit!' />
       </form>
+      </div>
+      </div>
     )
   }
 }
