@@ -1,5 +1,64 @@
+/* Typography */
+@import url('https://fonts.googleapis.com/css?family=Anton|Libre+Barcode+39+Text|Orbitron:400,700|Roboto+Condensed:400,700');
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+}
+
+h2 {
+    font-family: 'Libre Barcode 39 Text', sans-serif;
+    font-weight: 400;
+}
+
+h5 {
+    font-family: 'Orbitron';
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.PostTitle {
+    background-color: #2E5266;
+    line-height: .75em;
+    padding: 2%;
+    margin-top: 2em;
+}
+
+.PostTitle h2 {
+    font-family: 'Anton';
+    font-weight: 400;
+    color: #E2C044;
+}
+
+.FormField {
+    margin: 0.5em;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.PostContent {
+    background-color: #6E8898;
+    height: 100%;
+    padding: 10px;
+}
+
+.BlogForm {
+    background-color: #9FB1BC;
+    margin-top: 3em;
+}
+/* Forms */
+textarea {
+    height: 10em;
+    width: 60%
+}
+
+.TitleInput {
+    width: 60%;
+}
+
+/* Main */
 .App {
   text-align: center;
+  background-color: #D3D0CB;
 }
 
 .App-logo {
@@ -8,10 +67,9 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #D3D0CB;
   height: 150px;
   padding: 20px;
-  color: white;
 }
 
 .App-intro {

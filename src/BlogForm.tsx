@@ -32,11 +32,21 @@ class BlogForm extends React.Component<any, any> {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type='text' name='titleValue' value={this.state.titleValue} onChange={this.handleChange} />
-        <input type='text' name='commentValue' value={this.state.commentValue} onChange={this.handleChange} />
-        <input type='submit' value='Submit!' />
-      </form>
+        <div className="row center-sm">
+        <div className="BlogForm col-sm-12">
+        <h4>Ethereum for your thoughts?</h4>
+        <form onSubmit={this.handleSubmit}>
+          <div className="FormField">
+          <p>Post Title: </p>
+          <input type='text' className="TitleInput" name='titleValue' value={this.state.titleValue} onChange={this.handleChange} />
+          </div>
+          <div className="FormField">
+          <p>Post Content: </p><textarea name='commentValue' value={this.state.commentValue} onChange={this.handleChange} />
+          </div>
+          <input type='submit' value='Submit!' />
+        </form>
+        </div>
+        </div>
     )
   }
 }

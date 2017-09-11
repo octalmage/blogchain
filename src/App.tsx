@@ -3,8 +3,10 @@ import contract from 'truffle-contract';
 import getWeb3 from './utils/getWeb3';
 import * as BlogContract from '../build/contracts/Blog.json';
 import './App.css';
-import BlogForm from './BlogForm.tsx'
-import PostList from './PostList.tsx'
+import 'normalize.css';
+import 'flexboxgrid';
+import BlogForm from './BlogForm'
+import PostList from './PostList'
 import {BlogInstance, Props, State, Post} from './BlogChainInterfaces'
 
 class App extends React.Component<Props, State> {
@@ -120,8 +122,15 @@ class App extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="App">
-        <h1>Blogchain</h1>
+        <div className="App">
+                <div className="row">
+                <div className="col-md-12">
+                  <div className="App-header">
+                    <h1>Blogchain</h1>
+                    <h5>A Hackathon Project</h5>
+                  </div>
+                </div>
+                </div>
         <PostList posts={this.state.posts} />
         <BlogForm onSubmit={this.addBlogPost} />
       </div>
