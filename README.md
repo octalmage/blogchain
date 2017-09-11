@@ -7,6 +7,14 @@ npm install -g ethereumjs-testrpc
 npm install -g truffle
 ```
 
+Also make sure you have at least Node.js v6 or above.
+
+Now install the local dependencies:
+
+```
+npm install
+```
+
 Then open a new terminal window and run:
 
 ```
