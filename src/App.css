@@ -21,6 +21,7 @@ h5 {
     background-color: #2E5266;
     line-height: .75em;
     padding: 2%;
+    margin-top: 2em;
 }
 
 .PostTitle h2 {
@@ -57,6 +58,7 @@ textarea {
 /* Main */
 .App {
   text-align: center;
+  background-color: #D3D0CB;
 }
 
 .App-logo {
@@ -68,7 +70,6 @@ textarea {
   background-color: #D3D0CB;
   height: 150px;
   padding: 20px;
-  color: ;
 }
 
 .App-intro {
