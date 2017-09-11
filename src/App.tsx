@@ -151,12 +151,12 @@ class App extends React.Component<any, any> {
         </div>
         {this.state.posts.map((post, i) => {
         return <span key={i}>
-          <div className="col-md-12">
+          <div className="col-md-8 col-md-offset-2">
             <div className="PostTitle">
               <h2>{post.title}</h2>
             </div>
           </div>
-          <div className="col-md-12">
+          <div className="col-md-8 col-md-offset-2">
             <div className="PostContent">
               <p>{post.content}</p>
             </div>
