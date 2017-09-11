@@ -1,5 +1,5 @@
 /* Typography */
-@import url('https://fonts.googleapis.com/css?family=Libre+Barcode+39+Text|Orbitron:400,700|Roboto+Condensed:400,700');
+@import url('https://fonts.googleapis.com/css?family=Anton|Libre+Barcode+39+Text|Orbitron:400,700|Roboto+Condensed:400,700');
 
 h1 {
     font-family: 'Orbitron', sans-serif;
@@ -13,17 +13,24 @@ h2 {
 
 .PostTitle {
     background-color: #CCC;
-    height: 2em;
+    line-height: .75em;
     padding: 2%;
 }
+
 .PostTitle h2 {
-    font-family: 'Roboto Condensed';
+    font-family: 'Anton';
     font-weight: 400;
 }
 
 .FormField {
     margin: 0.5em;
     font-family: 'Roboto Condensed', sans-serif;
+}
+
+.PostContent {
+    background-color: #EEE;
+    height: 100%;
+    padding: 10px;
 }
 
 /* Forms */
@@ -36,6 +43,7 @@ textarea {
     width: 60%;
 }
 
+/* Main */
 .App {
   text-align: center;
 }
