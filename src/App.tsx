@@ -144,8 +144,9 @@ class App extends React.Component<any, any> {
       <div className="App">
         <div className="row">
         <div className="col-md-12">
-          <div className="header">
+          <div className="App-header">
             <h1>Blogchain</h1>
+            <h5>A Hackathon Project</h5>
           </div>
         </div>
         </div>

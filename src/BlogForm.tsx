@@ -31,8 +31,8 @@ class BlogForm extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="BlogForm row center-sm">
-      <div className="col-sm-12">
+      <div className="row center-sm">
+      <div className="BlogForm col-sm-12">
       <h4>Ethereum for your thoughts?</h4>
       <form onSubmit={this.handleSubmit}>
         <div className="FormField">
