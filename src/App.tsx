@@ -4,6 +4,7 @@ import contract from 'truffle-contract';
 import getWeb3 from './utils/getWeb3';
 import * as BlogContract from '../build/contracts/Blog.json';
 import './App.css';
+import BlogForm from './BlogForm.tsx'
 
 interface ContractFunction {
   call: Function;
@@ -138,13 +139,14 @@ class App extends React.Component<any, any> {
   render() {
     return (
       <div className="App">
-      <h1>Blogchain</h1>
-      {this.state.posts.map((post, i) => {
-        return <span key={i}><h2>{post.title}</h2><p>{post.content}</p></span>;
-      })}
-      {!this.state.posts.length &&
-        <h2>Loading...</h2>
-      }
+        <h1>Blogchain</h1>
+        {this.state.posts.map((post, i) => {
+          return <span key={i}><h2>{post.title}</h2><p>{post.content}</p></span>;
+        })}
+        {!this.state.posts.length &&
+          <h2>Loading...</h2>
+        }
+        <BlogForm onSubmit={this.addBlogPost} />
       </div>
     );
   }
