@@ -122,15 +122,15 @@ class App extends React.Component<Props, State> {
 
   render() {
     return (
-        <div className="App">
-                <div className="row">
-                <div className="col-md-12">
-                  <div className="App-header">
-                    <h1>Blogchain</h1>
-                    <h5>A Hackathon Project</h5>
-                  </div>
-                </div>
-                </div>
+      <div className="App">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="App-header">
+              <h1>Blogchain</h1>
+              <h5>A Hackathon Project</h5>
+            </div>
+          </div>
+        </div>
         <PostList posts={this.state.posts} />
         <BlogForm onSubmit={this.addBlogPost} />
       </div>
