@@ -1,34 +1,15 @@
 import * as React from 'react';
-import Web3 from 'web3';
 import contract from 'truffle-contract';
 import getWeb3 from './utils/getWeb3';
 import * as BlogContract from '../build/contracts/Blog.json';
+import './App.css';
 import 'normalize.css';
 import 'flexboxgrid';
-import './App.css';
-import BlogForm from './BlogForm.tsx'
+import BlogForm from './BlogForm'
+import PostList from './PostList'
+import {BlogInstance, Props, State, Post} from './BlogChainInterfaces'
 
-interface ContractFunction {
-  call: Function;
-}
-
-interface BlogInstance {
-  getBlogPostsCount: ContractFunction;
-  getBlogPost: ContractFunction;
-}
-
-interface Post {
-  title: string;
-  content: string;
-  date: string;
-}
-
-interface State {
-  posts: Post[];
-  web3: Web3;
-}
-
-class App extends React.Component<any, any> {
+class App extends React.Component<Props, State> {
   state: State;
   constructor() {
     super();
@@ -141,25 +122,18 @@ class App extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="App row center-md">
-        <div className="col-xs-12">
-          <h1>Blogchain</h1>
-        </div>
-        {this.state.posts.map((post, i) => {
-        return <span key={i}>
-          <div className="postTitle col-xs-12">
-            <h2>{post.title}</h2>
-          </div>
-          <div className="postContent col-xs-12">
-            <p>{post.content}</p>
-          </div>
-          </span>;
-          })}
-          {!this.state.posts.length &&
-          <h2>Loading...</h2>
-        }
+        <div className="App">
+                <div className="row">
+                <div className="col-md-12">
+                  <div className="App-header">
+                    <h1>Blogchain</h1>
+                    <h5>A Hackathon Project</h5>
+                  </div>
+                </div>
+                </div>
+        <PostList posts={this.state.posts} />
         <BlogForm onSubmit={this.addBlogPost} />
-        </div>
+      </div>
     );
   }
 }

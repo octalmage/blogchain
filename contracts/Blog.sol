@@ -21,6 +21,7 @@ contract Blog {
   BlogPost[] public BlogPosts;
 
   function addBlogPost(bytes32 title, bytes32 content) public returns (uint) {
+    require(msg.sender == owner);
 
     BlogPosts.push(BlogPost(title, content));
 
