@@ -1,3 +1,16 @@
+/* Typography */
+@import url('https://fonts.googleapis.com/css?family=Libre+Barcode+39+Text|Orbitron:400,700|Roboto+Condensed:400,700');
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+}
+
+h2 {
+    font-family: 'Libre Barcode 39 Text', sans-serif;
+    font-weight: 400;
+}
+
 .App {
   text-align: center;
 }

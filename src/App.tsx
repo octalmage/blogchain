@@ -3,6 +3,8 @@ import Web3 from 'web3';
 import contract from 'truffle-contract';
 import getWeb3 from './utils/getWeb3';
 import * as BlogContract from '../build/contracts/Blog.json';
+import 'normalize.css';
+import 'flexboxgrid';
 import './App.css';
 import BlogForm from './BlogForm.tsx'
 
@@ -18,6 +20,7 @@ interface BlogInstance {
 interface Post {
   title: string;
   content: string;
+  date: string;
 }
 
 interface State {
@@ -138,16 +141,25 @@ class App extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="App">
-        <h1>Blogchain</h1>
+      <div className="App row center-md">
+        <div className="col-xs-12">
+          <h1>Blogchain</h1>
+        </div>
         {this.state.posts.map((post, i) => {
-          return <span key={i}><h2>{post.title}</h2><p>{post.content}</p></span>;
-        })}
-        {!this.state.posts.length &&
+        return <span key={i}>
+          <div className="postTitle col-xs-12">
+            <h2>{post.title}</h2>
+          </div>
+          <div className="postContent col-xs-12">
+            <p>{post.content}</p>
+          </div>
+          </span>;
+          })}
+          {!this.state.posts.length &&
           <h2>Loading...</h2>
         }
         <BlogForm onSubmit={this.addBlogPost} />
-      </div>
+        </div>
     );
   }
 }
