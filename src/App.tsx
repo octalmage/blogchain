@@ -1,32 +1,13 @@
 import * as React from 'react';
-import Web3 from 'web3';
 import contract from 'truffle-contract';
 import getWeb3 from './utils/getWeb3';
 import * as BlogContract from '../build/contracts/Blog.json';
 import './App.css';
 import BlogForm from './BlogForm.tsx'
 import PostList from './PostList.tsx'
+import {BlogInstance, Props, State, Post} from './BlogChainInterfaces'
 
-interface ContractFunction {
-  call: Function;
-}
-
-interface BlogInstance {
-  getBlogPostsCount: ContractFunction;
-  getBlogPost: ContractFunction;
-}
-
-interface Post {
-  title: string;
-  content: string;
-}
-
-interface State {
-  posts: Post[];
-  web3: Web3;
-}
-
-class App extends React.Component<any, any> {
+class App extends React.Component<Props, State> {
   state: State;
   constructor() {
     super();
