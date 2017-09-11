@@ -16,7 +16,6 @@ contract Blog {
     // It's possible to read it from JavaScript though, so we could rewrite the tests in JavaScript.
     // Or we could split the content, apparently bytes32 is much more efficient.
     bytes32 content;
-    bytes32 date;
   }
 
   BlogPost[] public BlogPosts;
