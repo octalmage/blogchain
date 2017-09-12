@@ -1,8 +1,10 @@
 import * as React from 'react';
 
 interface State {
-  titleValue: string;
-  commentValue: string;
+  titleInputValue: string;
+  commentInputValue: string,
+  titleInputLength: number,
+  commentInputLength: number
 }
 
 class BlogForm extends React.Component<any, any> {
@@ -12,8 +14,10 @@ class BlogForm extends React.Component<any, any> {
     super(props);
 
     this.state = {
-      titleValue: '',
-      commentValue: ''
+      titleInputValue: '',
+      commentInputValue: '',
+      titleInputLength: 0,
+      commentInputLength: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,13 +25,24 @@ class BlogForm extends React.Component<any, any> {
   }
 
   handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    let valueKey = event.target.name + 'Value'
+    let lengthKey = event.target.name + 'Length'
+
+    this.setState({
+      [valueKey]: event.target.value,
+      [lengthKey]: event.target.value.length,
+    })
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.titleValue, this.state.commentValue);
-    this.setState({ titleValue: '', commentValue: '' })
+    this.props.onSubmit(this.state.titleInputValue, this.state.commentInputValue);
+    this.setState({
+      titleInputValue: '',
+      commentInputValue: '',
+      titleInputLength: 0,
+      commentInputLength: 0
+    });
   }
 
   render() {
@@ -38,10 +53,12 @@ class BlogForm extends React.Component<any, any> {
           <form onSubmit={this.handleSubmit}>
             <div className="FormField">
               <p>Post Title: </p>
-              <input type='text' className="TitleInput" name='titleValue' value={this.state.titleValue} onChange={this.handleChange} />
+              <input type='text' className="TitleInput" name='titleInput' maxLength={32} value={this.state.titleInputValue} onChange={this.handleChange} />
+              <p className='subtext'>{32 - this.state.titleInputLength} characters remaining</p>
             </div>
             <div className="FormField">
-              <p>Post Content: </p><textarea name='commentValue' value={this.state.commentValue} onChange={this.handleChange} />
+              <p>Post Content: </p><textarea name='commentInput' maxLength={1024} value={this.state.commentInputValue} onChange={this.handleChange} />
+              <p className='subtext'>{1024 - this.state.commentInputLength} characters remaining</p>
             </div>
             <input type='submit' value='Submit!' />
           </form>
