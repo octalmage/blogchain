@@ -7,7 +7,7 @@ import 'normalize.css';
 import 'flexboxgrid';
 import BlogForm from './BlogForm'
 import PostList from './PostList'
-import {BlogInstance, Props, State, Post} from './BlogChainInterfaces'
+import { BlogInstance, Props, State, Post } from './BlogChainInterfaces'
 
 class App extends React.Component<Props, State> {
   state: State;
@@ -75,9 +75,19 @@ class App extends React.Component<Props, State> {
       }).then((count: Number) => {
         var tasks: Object[] = [];
         for (let i = 0; i < count; i++) {
-          tasks.push(blogInstance.getBlogPost.call(i));
+          tasks.push(
+            Promise.all([
+              blogInstance.getBlogPostTitle.call(i),
+              blogInstance.getBlogPostContent.call(i)
+            ])
+          );
         }
+
         return Promise.all(tasks);
+      }).then((results) => {
+        return results.map((result) => {
+          return { title: result[0], content: result[1] };
+        })
       }).then(this.convertPosts).then((posts: Array<Post>) => {
         this.setState({ posts: posts.reverse() });
       });
@@ -98,8 +108,7 @@ class App extends React.Component<Props, State> {
 
       blog.deployed().then((instance) => {
         blogInstance = instance;
-
-        return blogInstance.addBlogPost(title, content, { from: account });
+        return blogInstance.addBlogPost(title, [content], { from: account });
       }).then((result) => {
         // return App.showBlogPosts();
       }).catch((err) => {
@@ -111,8 +120,10 @@ class App extends React.Component<Props, State> {
   // Data off the chain is in binary format, need to convert.
   convertPost(post: Post) {
     return {
-      title: this.state.web3.toAscii(post[0]),
-      content: this.state.web3.toAscii(post[1]),
+      title: this.state.web3.toAscii(post.title),
+      content: post.content.map((line) => {
+        return this.state.web3.toAscii(line).replace(/\u0000/g, '');
+      }).join(''),
     };
   }
 

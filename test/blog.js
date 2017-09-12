@@ -26,11 +26,11 @@ contract('Blog', (accounts) => {
     return Blog.deployed().then((instance) => {
       return instance.getBlogPostContent.call(0);
     }).then((content) => {
-      content.forEach((line) => {
-        console.log(web3.toAscii(line).replace(/\u0000/g, ''));
-      });
-      var convertedTitle = web3.toAscii(title).replace(/\u0000/g, '');
-      assert.equal(convertedTitle, 'Test');
+      const convertedContent = content.map((line) => {
+        return web3.toAscii(line).replace(/\u0000/g, '');
+      }).join('');
+
+      assert.equal(convertedContent, 'Test Content');
     });
   });
 });
