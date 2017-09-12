@@ -1,32 +1,33 @@
-import Web3 from 'web3';
-
 export interface BlogInstance {
   getBlogPostsCount: ContractFunction;
   getBlogPostTitle: ContractFunction;
   getBlogPostContent: ContractFunction;
   getBlogPost: ContractFunction; // TODO: Remove this.
+  addBlogPost: Function;
 }
 
 interface ContractFunction {
   call: Function;
 }
 
-export interface Post {
+export interface HexPost {
   title: string;
   content: string[];
+}
+
+export interface Post {
+  title: string;
+  content: string;
 }
 
 export interface Props {
 }
 
 export interface PostState {
-  title: string;
-  content: string;
-  web3: Web3;
+  post: Post;
 }
 
 
 export interface State {
   posts: Post[];
-  web3: Web3;
 }
