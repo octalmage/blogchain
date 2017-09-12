@@ -16,14 +16,13 @@ contract Blog {
     // It's possible to read it from JavaScript though, so we could rewrite the tests in JavaScript.
     // Or we could split the content, apparently bytes32 is much more efficient.
     bytes32[32] content;
+    address author;
   }
 
   BlogPost[] public BlogPosts;
 
   function addBlogPost(bytes32 title, bytes32[32] content) public returns (uint) {
-    require(msg.sender == owner);
-
-    return BlogPosts.push(BlogPost(title, content)) - 1;
+    return BlogPosts.push(BlogPost(title, content, msg.sender)) - 1;
   }
 
   function getBlogPostsCount() public constant returns(uint) {
@@ -38,4 +37,7 @@ contract Blog {
     return BlogPosts[index].content;
   }
 
+  function getBlogPostAuthor(uint index) public returns(address) {
+    return BlogPosts[index].author;
+  }
 }

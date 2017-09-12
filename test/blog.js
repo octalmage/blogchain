@@ -33,4 +33,13 @@ contract('Blog', (accounts) => {
       assert.equal(convertedContent, 'Test Content');
     });
   });
+
+  it('should return the post author.', function() {
+    return Blog.deployed().then((instance) => {
+      return instance.getBlogPostAuthor.call(0);
+    }).then((author) => {
+      assert.equal(author.length, 42);
+      assert.equal(author.substring(0, 2), '0x');
+    });
+  });
 });
