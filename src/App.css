@@ -61,10 +61,6 @@ h5 {
 	font-weight: 400;
 }
 
-.FormField .subtext {
-  font-size: .25em;
-}
-
 textarea {
   height: 10em;
   width: 60%;
