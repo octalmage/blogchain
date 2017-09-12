@@ -3,6 +3,7 @@ import getWeb3 from './utils/getWeb3';
 import './App.css';
 import 'normalize.css';
 import 'flexboxgrid';
+import Header from './Header'
 import BlogForm from './BlogForm'
 import PostList from './PostList'
 import { Props, State } from './BlogChainInterfaces'
@@ -54,14 +55,7 @@ class App extends React.Component<Props, State> {
   render() {
     return (
       <div className="App">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="App-header">
-              <h1>Blogchain</h1>
-              <h5>A Hackathon Project</h5>
-            </div>
-          </div>
-        </div>
+        <Header />
         <PostList posts={this.state.posts} />
         <BlogForm onSubmit={this.addBlogPost} />
       </div>

@@ -13,14 +13,14 @@ class PostList extends React.Component<any, any> {
           return (
             <span key={i}>
               <div className="row">
-                <div className="col-md-8 col-md-offset-2">
+                <div className="col-xs-8 col-xs-offset-2">
                   <div className="PostTitle">
                     <Link to={`/post/${(this.props.posts.length - i) - 1}`}><h2>{post.title}</h2></Link>
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-8 col-md-offset-2">
+                <div className="col-xs-8 col-xs-offset-2">
                   <div className="PostContent">
                     <p>{post.content}</p>
                   </div>
