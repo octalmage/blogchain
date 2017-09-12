@@ -31,8 +31,7 @@ class Post extends React.Component< { match: { params: { post_id: string } } }, 
         <div className="row">
           <div className="col-xs-8 col-xs-offset-2">
             <div className="PostTitle">
-              <h2>Post</h2>
-              { this.state.post.title }
+              <h2>{ this.state.post.title }</h2>
               </div>
             </div>
           </div>
