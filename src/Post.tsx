@@ -1,8 +1,8 @@
 import React from 'react';
-import getWeb3 from './utils/getWeb3';
+import Header from './Header'
 import { PostState } from './BlogChainInterfaces'
 import Blog from './utils/Blog';
-import Header from './Header'
+import getWeb3 from './utils/getWeb3';
 
 class Post extends React.Component< { match: { params: { post_id: string } } }, PostState> {
   state: PostState;
@@ -11,7 +11,7 @@ class Post extends React.Component< { match: { params: { post_id: string } } }, 
     super(props);
 
     this.state = {
-      post: { title: '', content: '' },
+      post: { title: '', content: '', author: '' },
     };
 
     this.blog = new Blog(getWeb3);
@@ -32,16 +32,17 @@ class Post extends React.Component< { match: { params: { post_id: string } } }, 
           <div className="col-xs-8 col-xs-offset-2">
             <div className="PostTitle">
               <h2>{ this.state.post.title }</h2>
-              </div>
+              by <h3>{ this.state.post.author}</h3>
             </div>
           </div>
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
-              <div className="PostContent">
-                { this.state.post.content }
-              </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-8 col-xs-offset-2">
+            <div className="PostContent">
+              { this.state.post.content }
             </div>
           </div>
+        </div>
       </div>
     );
   }
