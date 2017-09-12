@@ -71,7 +71,7 @@ class Blog {
 
   convertPost(post: HexPost): Post {
     return {
-      title: this.web3.toAscii(post.title),
+      title: this.web3.toAscii(post.title).replace(/\u0000/g, ''),
       content: post.content.map((line) => {
         return this.web3.toAscii(line).replace(/\u0000/g, '');
       }).join(''),
@@ -92,8 +92,47 @@ class Blog {
       })
       .then((accounts) => {
         return this.blogInstance.addBlogPost(title, [content], { from: accounts[0] });
+      })
+      .then((response) => {
+        return this.waitTx(response.tx)
+          .then(() => response); // Return the original response.
       });
   }
+
+  waitTx(txHash: string) {
+    return new Promise((resolve, reject) => {
+      /*
+      * Watch for a particular transaction hash and call the awaiting function when done;
+      * Ether-pudding uses another method, with web3.eth.getTransaction(...) and checking the txHash;
+      * on https://github.com/ConsenSys/ether-pudding/blob/master/index.js
+      */
+      let blockCounter = 15;
+      // Wait for tx to be finished.
+      let filter = this.web3.eth.filter('latest').watch((err, blockHash) => {
+        if (blockCounter <= 0) {
+          filter.stopWatching();
+          filter = null;
+          console.warn('!! Tx expired !!');
+          return reject();
+        }
+        // Get info about latest Ethereum block.
+        this.web3.eth.getBlock(blockHash, false, (error, block) => {
+          --blockCounter;
+          // Found tx hash?
+          if (block.transactions.indexOf(txHash) > -1) {
+            // Tx is finished
+            filter.stopWatching();
+            filter = null;
+
+            return resolve();
+          // Tx hash not found yet?
+          } else {
+            console.log('Waiting tx..', blockCounter);
+          }
+        });
+      });
+    });
+  };
 }
 
 export default Blog;
