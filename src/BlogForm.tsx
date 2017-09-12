@@ -34,8 +34,8 @@ class BlogForm extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="row center-sm">
-        <div className="BlogForm col-sm-12">
+      <div className="row center-xs">
+        <div className="BlogForm col-xs-12">
           <h4>Ethereum for your thoughts?</h4>
           <form onSubmit={this.handleSubmit}>
             <div className="FormField">
@@ -47,7 +47,7 @@ class BlogForm extends React.Component<any, any> {
               <p>Post Content: </p><textarea name='commentInput' maxLength={1024} value={this.state.commentInput} onChange={this.handleChange} />
               <p className='subtext'>{1024 - this.state.commentInput.length} characters remaining</p>
             </div>
-            <input type='submit' value='Submit!' />
+            <input className="Submit" type='submit' value='Submit' />
           </form>
         </div>
       </div>

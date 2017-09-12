@@ -3,6 +3,7 @@ import contract from 'truffle-contract';
 import * as BlogContract from '../build/contracts/Blog.json';
 import getWeb3 from './utils/getWeb3';
 import {BlogInstance, PostState} from './BlogChainInterfaces'
+import Header from './Header'
 
 class Post extends React.Component< { match: {params: {post_id: string } } }, PostState> {
   state: PostState;
@@ -55,11 +56,24 @@ class Post extends React.Component< { match: {params: {post_id: string } } }, Po
 
   render() {
     return (
-      <div>
-        <h2>Post</h2>
-        { this.props.match.params.post_id }
-        { this.state.title }
-        { this.state.content }
+      <div className="App Post center-xs">
+        <Header />
+        <div className="row">
+          <div className="col-xs-8 col-xs-offset-2">
+            <div className="PostTitle">
+              <h2>Post</h2>
+              { this.props.match.params.post_id }
+              { this.state.title }
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-8 col-xs-offset-2">
+              <div className="PostContent">
+                { this.state.content }
+              </div>
+            </div>
+          </div>
       </div>
     );
   }

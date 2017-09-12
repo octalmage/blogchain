@@ -1,66 +1,118 @@
 /* Typography */
-@import url('https://fonts.googleapis.com/css?family=Anton|Libre+Barcode+39+Text|Orbitron:400,700|Roboto+Condensed:400,700');
+@import url('https://fonts.googleapis.com/css?family=Anton|Berkshire+Swash|Libre+Barcode+39+Text|Orbitron:400,700|Roboto+Condensed:400,700');
 
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
+.App-header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+	font-size: 3.5em;
+	text-shadow: 5px 5px 5px #888;
 }
 
 h2 {
-    font-family: 'Libre Barcode 39 Text', sans-serif;
-    font-weight: 400;
+  font-family: 'Libre Barcode 39 Text', sans-serif;
+  font-weight: 400;
+}
+
+h4 {
+	font-family: 'Berkshire Swash';
 }
 
 h5 {
-    font-family: 'Orbitron';
-    font-size: 1em;
-    font-weight: 400;
+  font-family: 'Orbitron';
+  font-size: 1em;
+  font-weight: 400;
 }
 
 .PostTitle {
-    background-color: #2E5266;
-    line-height: .75em;
-    padding: 2%;
-    margin-top: 2em;
+  background-color: #2E5266;
+  line-height: .75em;
+  padding: 2%;
+  margin-top: 2em;
+	border: 1px solid black;
 }
 
 .PostTitle h2 {
-    font-family: 'Anton';
-    font-weight: 400;
-    color: #E2C044;
-}
-
-.FormField {
-    margin: 0.5em;
-    font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Anton';
+  font-weight: 400;
+  color: #E2C044;
 }
 
 .PostContent {
-    background-color: #6E8898;
-    height: 100%;
-    padding: 10px;
+  background-color: #6E8898;
+  height: 100%;
+  padding: 10px;
+	border: 1px solid black;
+	border-top: 0px;
 }
 
 .BlogForm {
-    background-color: #9FB1BC;
-    margin-top: 3em;
+  background-color: #9FB1BC;
+  margin-top: 3em;
+  height: 100%;
 }
 /* Forms */
+.FormField {
+  margin: 0.5em;
+}
+
+.FormField p {
+	font-family: 'Orbitron';
+	font-size: 1em;
+	font-weight: 400;
+}
+
 textarea {
-    height: 10em;
-    width: 60%
+  height: 10em;
+  width: 60%;
+	box-shadow: 2px 2px 1px #666;
+	border: solid 1px black;
+}
+
+textarea:focus {
+  outline: none;
 }
 
 .TitleInput {
-    width: 60%;
+  width: 60%;
+	height: 30px;
+	box-shadow: 2px 2px 1px #666;
+	border: solid 1px black;
+	font-size: 1em;
+	text-align: center;
+}
+
+.TitleInput:focus {
+	    outline: none;
+}
+
+.Submit {
+  margin-bottom: 2%;
+  font-family: 'Orbitron';
+  font-size: 1em;
+  height: 40px;
+  width: 110px;
+  box-shadow: 5px 5px 2.5px #666;
+	border: solid 1px black;
+	-o-transition:.5s;
+	-ms-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+}
+
+.Submit:hover {
+		text-shadow: 3px 3px 1px #666;
 }
 
 /* Main */
 .App {
   text-align: center;
   background-color: #D3D0CB;
+	height: 100%
 }
 
+.Post {
+	height: 100vh;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
