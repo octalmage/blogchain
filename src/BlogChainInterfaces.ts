@@ -4,6 +4,7 @@ export interface BlogInstance {
   getBlogPostsCount: ContractFunction;
   getBlogPostTitle: ContractFunction;
   getBlogPostContent: ContractFunction;
+  getBlogPost: ContractFunction; // TODO: Remove this.
 }
 
 interface ContractFunction {
