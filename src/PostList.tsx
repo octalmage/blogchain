@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 class PostList extends React.Component<any, any> {
   constructor(props) {
@@ -14,7 +15,7 @@ class PostList extends React.Component<any, any> {
               <div className="row">
                 <div className="col-md-8 col-md-offset-2">
                   <div className="PostTitle">
-                    <h2>{post.title}</h2>
+                    <Link to={`/post/${(this.props.posts.length - i) - 1}`}><h2>{post.title}</h2></Link>
                   </div>
                 </div>
               </div>
