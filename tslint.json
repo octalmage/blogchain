@@ -1,6 +1,7 @@
 {
     "extends": ["tslint-react"],
     "rules": {
+        "jsx-alignment": true,
         "align": [
             true,
             "parameters",

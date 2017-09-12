@@ -54,12 +54,6 @@ class App extends React.Component<Props, State> {
   }
 
   instantiateContract() {
-    /*
-    * SMART CONTRACT EXAMPLE
-    *
-    * Normally these functions would be called in the context of a
-    * state management library, but for convenience I've placed them here.
-    */
     const blog = contract(BlogContract);
     blog.setProvider(this.state.web3.currentProvider);
 
