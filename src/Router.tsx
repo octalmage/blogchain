@@ -2,12 +2,14 @@ import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import App from './App'
 import Post from './Post'
+import Author from './Author.tsx'
 
-const Router: React.SFC = () => (
+const Router = ()  => (
   <BrowserRouter>
     <div>
         <Route exact path="/" component={App}/>
         <Route path="/post/:post_id" component={Post}/>
+        <Route path="/author/:author_id" component={Author}/>
     </div>
   </BrowserRouter>
 )

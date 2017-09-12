@@ -44,11 +44,12 @@ class Blog {
       .then(() => {
         return Promise.all([
           this.blogInstance.getBlogPostTitle.call(id),
-          this.blogInstance.getBlogPostContent.call(id)
+          this.blogInstance.getBlogPostContent.call(id),
+          this.blogInstance.getBlogPostAuthor.call(id)
         ]);
       })
       .then((results) => {
-        return { title: results[0], content: results[1] };
+        return { title: results[0], content: results[1], author: results[2] };
       })
       .then(this.convertPost);
   }
@@ -69,8 +70,13 @@ class Blog {
       .then((results) => results.map(result => <Post> result));
   }
 
+  getBlogPostsByAuthor(author): Promise<Post[]> {
+      return this.getBlogPosts().then((all_posts) => all_posts.filter( function(post) { return post.author == author; } ));
+  }
+
   convertPost(post: HexPost): Post {
     return {
+      author: post.author,
       title: this.web3.toAscii(post.title),
       content: post.content.map((line) => {
         return this.web3.toAscii(line).replace(/\u0000/g, '');
