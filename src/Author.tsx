@@ -1,13 +1,11 @@
 import React from 'react';
 import Header from './Header'
-import Post from './Post';
 import PostList from './PostList.tsx';
 import Blog from './utils/Blog.ts';
 import getWeb3 from './utils/getWeb3';
 
 class Author extends React.Component< { match: { params: { author_id: string } } }, any> {
   blog: Blog;
-  posts: Post[];
   constructor(props) {
     super(props);
 

@@ -1,32 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Post as PostInterface } from './BlogChainInterfaces';
+import Post from './Post';
 
-class PostList extends React.Component<any, any> {
-  constructor(props) {
-    super(props);
-  }
-
+class PostList extends React.Component<{ posts: PostInterface[] }, any> {
   render () {
     return (
       <div>
         {this.props.posts.map((post, i) => {
+          const id = (this.props.posts.length - i) - 1;
           return (
-            <span key={i}>
-              <div className="row">
-                <div className="col-xs-8 col-xs-offset-2">
-                  <div className="PostTitle">
-                    <Link to={`/post/${(this.props.posts.length - i) - 1}`}><h2>{post.title}</h2></Link>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-xs-8 col-xs-offset-2">
-                  <div className="PostContent">
-                    <p>{post.content}</p>
-                  </div>
-                </div>
-              </div>
-            </span>
+            <Post key={id} post={post} id={id} />
           );
         })}
         {!this.props.posts.length &&
