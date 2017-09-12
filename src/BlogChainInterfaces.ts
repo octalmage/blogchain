@@ -17,6 +17,13 @@ export interface Post {
 export interface Props {
 }
 
+export interface PostState {
+  title: string;
+  content: string;
+  web3: Web3;
+}
+
+
 export interface State {
   posts: Post[];
   web3: Web3;
