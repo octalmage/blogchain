@@ -7,7 +7,12 @@ const Post = (props: { post: PostInterface, id?: number }) => (
     <div className="row">
       <div className="col-xs-8 col-xs-offset-2">
         <div className="PostTitle">
+        { props.id &&
           <Link to={`/post/${props.id}`}><h2>{props.post.title}</h2></Link>
+        }
+        { !props.id &&
+          <h2>{props.post.title}</h2>
+        }
           by <Link to={'/author/' + props.post.author}>
             <h3 title={props.post.author}>{props.post.author.substring(0, 9)}</h3>
           </Link>
