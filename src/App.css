@@ -45,6 +45,12 @@ h5 {
 	border-top: 0px;
 }
 
+.BlogForm {
+  background-color: #9FB1BC;
+  margin-top: 3em;
+  height: 100%;
+}
+
 /* Forms */
 .FormField {
   margin: 0.5em;
@@ -99,7 +105,11 @@ textarea:focus {
 }
 
 .Submit:hover {
-		text-shadow: 3px 3px 1px #666;
+	text-shadow: 3px 3px 1px #666;
+}
+
+.Submit:actve .Submit:hover {
+  outline: none;
 }
 
 /* Main */
