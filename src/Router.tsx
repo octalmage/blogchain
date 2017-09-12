@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import App from './App.tsx'
-import Post from './Post.tsx'
+import App from './App'
+import Post from './Post'
 
 const Router: React.SFC = () => (
   <BrowserRouter>

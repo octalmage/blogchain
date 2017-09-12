@@ -75,6 +75,7 @@ class Blog {
       content: post.content.map((line) => {
         return this.web3.toAscii(line).replace(/\u0000/g, '');
       }).join(''),
+
     };
   }
 
