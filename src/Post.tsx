@@ -33,7 +33,9 @@ class Post extends React.Component< { match: { params: { post_id: string } } }, 
           <div className="col-xs-8 col-xs-offset-2">
             <div className="PostTitle">
               <h2>{ this.state.post.title }</h2>
-              by <Link to={'/author/' + this.state.post.author}><h3>{ this.state.post.author}</h3></Link>
+              by <Link to={'/author/' + this.state.post.author}>
+                <h3 title={this.state.post.author}>{this.state.post.author.substring(0, 9)}</h3>
+              </Link>
             </div>
           </div>
         </div>
