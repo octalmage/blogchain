@@ -15,25 +15,27 @@ contract Blog {
     // The test needs to read the content, so we need this to be bytes32 for now.
     // It's possible to read it from JavaScript though, so we could rewrite the tests in JavaScript.
     // Or we could split the content, apparently bytes32 is much more efficient.
-    bytes32 content;
+    bytes32[32] content;
   }
 
   BlogPost[] public BlogPosts;
 
-  function addBlogPost(bytes32 title, bytes32 content) public returns (uint) {
+  function addBlogPost(bytes32 title, bytes32[32] content) public returns (uint) {
     require(msg.sender == owner);
 
-    BlogPosts.push(BlogPost(title, content));
-
-    return BlogPosts.length - 1;
+    return BlogPosts.push(BlogPost(title, content)) - 1;
   }
 
   function getBlogPostsCount() public constant returns(uint) {
     return BlogPosts.length;
   }
 
-  function getBlogPost(uint index) public returns(bytes32, bytes32) {
-    return (BlogPosts[index].title, BlogPosts[index].content);
+  function getBlogPostTitle(uint index) public returns(bytes32) {
+    return BlogPosts[index].title;
+  }
+
+  function getBlogPostContent(uint index) public returns(bytes32[32]) {
+    return BlogPosts[index].content;
   }
 
 }
