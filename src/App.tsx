@@ -28,17 +28,7 @@ class App extends React.Component<Props, State> {
 
   componentWillMount() {
     return this.blog.initialized()
-      .then(() => {
-        this.loadBlogPosts();
-
-        this.blog.web3.eth.filter('latest', (error) => {
-          if (!error) {
-            this.loadBlogPosts();
-          } else {
-            console.error(error);
-          }
-        });
-      });
+      .then(() => this.loadBlogPosts());
   }
 
   loadBlogPosts() {
@@ -49,7 +39,8 @@ class App extends React.Component<Props, State> {
   }
 
   addBlogPost(title: string, content: string) {
-    return this.blog.addBlogPost(title, content);
+    return this.blog.addBlogPost(title, content)
+      .then(() => this.loadBlogPosts());
   }
 
   render() {
