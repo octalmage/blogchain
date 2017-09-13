@@ -94,10 +94,7 @@ contract Blog {
 
   struct BlogPost {
     bytes32 title;
-    // Contracts cannot return strings to other conracts, so this is bytes32 for now.
-    // The test needs to read the content, so we need this to be bytes32 for now.
-    // It's possible to read it from JavaScript though, so we could rewrite the tests in JavaScript.
-    // Or we could split the content, apparently bytes32 is much more efficient.
+    // Dynamic length strings are hard in Solidity, so we have to use a byte array.
     bytes32[32] content;
     address author;
   }
@@ -124,7 +121,8 @@ contract Blog {
     return BlogPosts[index].author;
   }
 }
-                    </code></pre>
+        </code></pre>
+				<span class="fragment">100% coverage!</span>
 				</section>
 
 				<section>
