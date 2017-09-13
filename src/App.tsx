@@ -17,6 +17,7 @@ class App extends React.Component<Props, State> {
 
     this.state = {
       posts: [],
+      canAddBlogPost: false,
     };
 
     this.loadBlogPosts = this.loadBlogPosts.bind(this);
@@ -28,7 +29,8 @@ class App extends React.Component<Props, State> {
 
   componentWillMount() {
     return this.blog.initialized()
-      .then(() => this.loadBlogPosts());
+      .then(() => this.loadBlogPosts())
+      .then(() => this.setState({ canAddBlogPost: this.blog.canAddBlogPost() }));
   }
 
   loadBlogPosts() {
@@ -48,7 +50,7 @@ class App extends React.Component<Props, State> {
       <div className="App">
         <Header />
         <PostList posts={this.state.posts} />
-        <BlogForm onSubmit={this.addBlogPost} />
+        {this.state.canAddBlogPost && <BlogForm onSubmit={this.addBlogPost} />}
       </div>
     );
   }

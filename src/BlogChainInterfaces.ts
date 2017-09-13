@@ -33,4 +33,5 @@ export interface PostState {
 
 export interface State {
   posts: Post[];
+  canAddBlogPost: boolean;
 }
