@@ -7,10 +7,10 @@ const Post = (props: { post: PostInterface, id?: number }) => (
     <div className="row">
       <div className="col-xs-8 col-xs-offset-2">
         <div className="PostTitle">
-        { props.id &&
+        { typeof props.id !== 'undefined' &&
           <Link to={`/post/${props.id}`}><h2>{props.post.title}</h2></Link>
         }
-        { !props.id &&
+        { typeof props.id === 'undefined' &&
           <h2>{props.post.title}</h2>
         }
           by <Link to={'/author/' + props.post.author}>
