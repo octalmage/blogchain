@@ -53,7 +53,12 @@
 
 				<section>
 					<h2>What is a blockchain?</h2>
-					<p>A distributed, public ledger of transactions stored in immutable, periodic increments called "blocks."
+                    <img src="https://media.giphy.com/media/l4FGnZ5NlHuvHfthm/giphy.gif" />
+				</section>
+
+				<section>
+					<h2>For real though</h2>
+					<p>A distributed, public ledger of transactions stored in immutable, increments called "blocks."
                     In order to create a block, a computational challenge must be completed which is time consuming to
                     compute, but quick to verify. The process of generating new blocks is called "mining." Each block
                     contains data that represents a set of transactions.
@@ -61,9 +66,10 @@
 				</section>
 
 				<section>
-					<h2>What is a blockchain? (cont)</h2>
+					<h2>Overly simple diagram</h2>
                     <img src="https://cdn-images-1.medium.com/max/2000/1*pbyFH4U5sO27UE1EjnImoA.png" />
 				</section>
+
 
 				<section>
 					<h2>What is Ethereum?</h2>
@@ -73,9 +79,61 @@
 				</section>
 
 				<section>
+					<h2>Smart contract</h2>
+                    <pre><code class="hljs" data-trim contenteditable>
+pragma solidity ^0.4.4;
+
+contract Blog {
+  address owner;
+
+  // Constructor.
+  function Blog() { owner = msg.sender; }
+
+  // Function to kill the contract.
+  function kill() { if (msg.sender == owner) selfdestruct(owner); }
+
+  struct BlogPost {
+    bytes32 title;
+    // Contracts cannot return strings to other conracts, so this is bytes32 for now.
+    // The test needs to read the content, so we need this to be bytes32 for now.
+    // It's possible to read it from JavaScript though, so we could rewrite the tests in JavaScript.
+    // Or we could split the content, apparently bytes32 is much more efficient.
+    bytes32[32] content;
+    address author;
+  }
+
+  BlogPost[] public BlogPosts;
+
+  function addBlogPost(bytes32 title, bytes32[32] content) public returns (uint) {
+    return BlogPosts.push(BlogPost(title, content, msg.sender)) - 1;
+  }
+
+  function getBlogPostsCount() public constant returns(uint) {
+    return BlogPosts.length;
+  }
+
+  function getBlogPostTitle(uint index) public returns(bytes32) {
+    return BlogPosts[index].title;
+  }
+
+  function getBlogPostContent(uint index) public returns(bytes32[32]) {
+    return BlogPosts[index].content;
+  }
+
+  function getBlogPostAuthor(uint index) public returns(address) {
+    return BlogPosts[index].author;
+  }
+}
+                    </code></pre>
+				</section>
+
+				<section>
 					<h2>Why host a blog on a blockchain?</h2>
-					<p>
-					</p>
+                    <ul>
+                        <li>No single point of failure</li>
+                        <li>Difficult to takedown or censor</li>
+                        <li>Content cannot be altered</li>
+                    </ul>
 				</section>
 
 				<section>
@@ -84,6 +142,21 @@
                     <p>
                     IPFS is a distributed file system that seeks to connect all computing devices with the same system of files. In some ways, this is similar to the original aims of the Web, but IPFS is actually more similar to a single bittorrent swarm exchanging git objects.
 					</p>
+				</section>
+
+				<section>
+					<h2>What we built</h2>
+                    <p>Node.js application using React.js and TypeScript that interacts with our smart contract,
+                    implemented with truffle-contract.
+                    </p>
+                </section>
+
+				<section>
+					<h2>Interesting learnings</h2>
+                    <ul>
+                        <li>Attempting to brute force system costs currency</li>
+                        <li>Writing blockchain-based apps is mostly "regular boring Javascript"</li>
+                    </ul>
 				</section>
 
 				<section>
@@ -97,7 +170,7 @@
 				</section>
 
 				<section>
-					<h2>Questions</h2>
+					<h2>Questions?</h2>
 				</section>
 
 			</div>
