@@ -31,7 +31,7 @@ let getWeb3 = new Promise<Results>((resolve, reject) => {
       // Fallback to localhost if no web3 injection.
       // TODO: We should add logic for using http://rpc.ethapi.org:8545 too.
       // TODO: https://infura.io/#how-to is another solution.
-      let provider = new Web3.providers.HttpProvider('http://localhost:8545');
+      let provider = new Web3.providers.HttpProvider('http://159.203.148.209:8545');
 
       web3 = new Web3(provider);
 
