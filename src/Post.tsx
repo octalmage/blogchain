@@ -1,6 +1,7 @@
 import React from 'react';
 import { Post as PostInterface } from './BlogChainInterfaces';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 const Post = (props: { post: PostInterface, id?: number }) => (
   <div>
@@ -22,7 +23,7 @@ const Post = (props: { post: PostInterface, id?: number }) => (
     <div className="row">
       <div className="col-xs-8 col-xs-offset-2">
         <div className="PostContent">
-          { props.post.content }
+          <ReactMarkdown source={props.post.content} />
         </div>
       </div>
     </div>
