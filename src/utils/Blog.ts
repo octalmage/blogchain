@@ -10,11 +10,10 @@ class Blog {
 
   constructor(getWeb3: object) {
     this.getWeb3 = getWeb3;
-
     this.convertPost = this.convertPost.bind(this);
   }
 
-  initialized() {
+  initialized(): Promise<void> {
     return new Promise((resolve, reject) => {
       // Short circuit if web3 is already defined.
       if (this.web3) {
@@ -37,6 +36,11 @@ class Blog {
           });
         });
     });
+  }
+
+  canAddBlogPost() {
+    // TODO: A localhost Geth HttpProvider can probably add posts, so this will only work for now.
+    return this.web3.currentProvider.constructor.name !== 'HttpProvider';
   }
 
   getBlogPost(id): Promise<Post> {
@@ -106,7 +110,7 @@ class Blog {
       });
   }
 
-  waitTx(txHash: string) {
+  waitTx(txHash: string): Promise<void> {
     return new Promise((resolve, reject) => {
       /*
       * Watch for a particular transaction hash and call the awaiting function when done;
