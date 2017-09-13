@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import BigNumber from 'bignumber.js';
 import contract from 'truffle-contract';
 import { BlogInstance, Post, HexPost } from '../BlogChainInterfaces';
 import * as BlogContract from '../../build/contracts/Blog.json';
@@ -53,7 +54,7 @@ class Blog {
         ]);
       })
       .then((results) => {
-        return { title: results[0], content: results[1], author: results[2] };
+        return { title: results[0], content: results[1], author: results[2], id: id };
       })
       .then(this.convertPost);
   }
@@ -63,9 +64,10 @@ class Blog {
       .then(() => {
         return this.blogInstance.getBlogPostsCount.call();
       })
-      .then((count: number) => {
+      .then((count: BigNumber) => {
         let tasks: object[] = [];
-        for (let i = 0; i < count; i++) {
+        // Load the posts backwards.
+        for (let i = count.toNumber() - 1; i >= 0; i--) {
           tasks.push(this.getBlogPost(i));
         }
 
@@ -80,6 +82,7 @@ class Blog {
 
   convertPost(post: HexPost): Post {
     return {
+      id: post.id,
       author: post.author,
       title: this.web3.toAscii(post.title).replace(/\u0000/g, ''),
       content: post.content.map((line) => {

@@ -7,9 +7,8 @@ class PostList extends React.Component<{ posts: PostInterface[] }, any> {
     return (
       <div>
         {this.props.posts.map((post, i) => {
-          const id = (this.props.posts.length - i) - 1;
           return (
-            <Post key={id} post={post} id={id} />
+            <Post key={i} post={post} />
           );
         })}
         {!this.props.posts.length &&

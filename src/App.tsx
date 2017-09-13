@@ -36,7 +36,7 @@ class App extends React.Component<Props, State> {
   loadBlogPosts() {
     return this.blog.getBlogPosts()
       .then((posts) => {
-        this.setState({ posts: posts.reverse() });
+        this.setState({ posts });
       });
   }
 
