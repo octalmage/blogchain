@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import BigNumber from 'bignumber.js';
 import contract from 'truffle-contract';
 import { BlogInstance, Post, HexPost } from '../BlogChainInterfaces';
 import * as BlogContract from '../../build/contracts/Blog.json';
@@ -63,9 +64,10 @@ class Blog {
       .then(() => {
         return this.blogInstance.getBlogPostsCount.call();
       })
-      .then((count: number) => {
+      .then((count: BigNumber) => {
         let tasks: object[] = [];
-        for (let i = 0; i < count; i++) {
+        // Load the posts backwards.
+        for (let i = count.toNumber() - 1; i >= 0; i--) {
           tasks.push(this.getBlogPost(i));
         }
 

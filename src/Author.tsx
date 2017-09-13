@@ -16,7 +16,7 @@ class Author extends React.Component< { match: { params: { author_id: string } }
   componentWillMount() {
     return this.blog.getBlogPostsByAuthor(this.props.match.params.author_id)
       .then((posts) => {
-        this.setState({ posts: posts });
+        this.setState({ posts });
       });
   }
 
