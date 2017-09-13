@@ -12,12 +12,14 @@ import Blog from './utils/Blog';
 class App extends React.Component<Props, State> {
   state: State;
   blog: Blog;
+  isWaitingOnPost: false;
   constructor() {
     super();
 
     this.state = {
       posts: [],
       canAddBlogPost: false,
+      isWaitingOnPost: false,
     };
 
     this.loadBlogPosts = this.loadBlogPosts.bind(this);
@@ -37,12 +39,14 @@ class App extends React.Component<Props, State> {
     return this.blog.getBlogPosts()
       .then((posts) => {
         this.setState({ posts: posts.reverse() });
+
       });
   }
 
   addBlogPost(title: string, content: string) {
     return this.blog.addBlogPost(title, content)
-      .then(() => this.loadBlogPosts());
+      .then(() => this.loadBlogPosts())
+      .then(() => this.setState({ isWaitingOnPost: true }));
   }
 
   render() {
@@ -50,6 +54,8 @@ class App extends React.Component<Props, State> {
       <div className="App">
         <Header />
         <PostList posts={this.state.posts} />
+        <div className="col-xs-12">{this.state.isWaitingOnPost &&
+          <h2>Loading...</h2>}</div>
         {this.state.canAddBlogPost && <BlogForm onSubmit={this.addBlogPost} />}
       </div>
     );
