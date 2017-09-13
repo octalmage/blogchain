@@ -38,7 +38,7 @@ class Blog {
     });
   }
 
-  canAddBlogPost() {
+  canAddBlogPost(): boolean {
     // TODO: A localhost Geth HttpProvider can probably add posts, so this will only work for now.
     return this.web3.currentProvider.constructor.name !== 'HttpProvider';
   }
