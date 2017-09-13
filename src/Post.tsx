@@ -9,9 +9,7 @@ const Post = (props: { post: PostInterface }) => (
       <div className="col-xs-8 col-xs-offset-2">
         <div className="PostTitle">
           <Link to={`/post/${props.post.id}`}><h2>{props.post.title}</h2></Link>
-          by <Link to={'/author/' + props.post.author}>
-            <h3 title={props.post.author}>{props.post.author.substring(0, 9)}</h3>
-          </Link>
+          by <Link to={'/author/' + props.post.author}> <span title={props.post.author}>{props.post.author.substring(0, 9)}</span></Link>
         </div>
       </div>
     </div>
