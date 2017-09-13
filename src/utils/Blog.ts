@@ -53,7 +53,7 @@ class Blog {
         ]);
       })
       .then((results) => {
-        return { title: results[0], content: results[1], author: results[2] };
+        return { title: results[0], content: results[1], author: results[2], id: id };
       })
       .then(this.convertPost);
   }
@@ -80,6 +80,7 @@ class Blog {
 
   convertPost(post: HexPost): Post {
     return {
+      id: post.id,
       author: post.author,
       title: this.web3.toAscii(post.title).replace(/\u0000/g, ''),
       content: post.content.map((line) => {

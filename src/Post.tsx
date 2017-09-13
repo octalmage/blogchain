@@ -3,17 +3,12 @@ import { Post as PostInterface } from './BlogChainInterfaces';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
-const Post = (props: { post: PostInterface, id?: number }) => (
+const Post = (props: { post: PostInterface }) => (
   <div>
     <div className="row">
       <div className="col-xs-8 col-xs-offset-2">
         <div className="PostTitle">
-        { typeof props.id !== 'undefined' &&
-          <Link to={`/post/${props.id}`}><h2>{props.post.title}</h2></Link>
-        }
-        { typeof props.id === 'undefined' &&
-          <h2>{props.post.title}</h2>
-        }
+          <Link to={`/post/${props.post.id}`}><h2>{props.post.title}</h2></Link>
           by <Link to={'/author/' + props.post.author}>
             <h3 title={props.post.author}>{props.post.author.substring(0, 9)}</h3>
           </Link>

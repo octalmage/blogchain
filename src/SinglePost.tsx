@@ -12,7 +12,7 @@ class SinglePost extends React.Component< { match: { params: { post_id: string }
     super(props);
 
     this.state = {
-      post: { title: '', content: '', author: '' },
+      post: { title: '', content: '', author: '', id: 0 },
     };
 
     this.blog = new Blog(getWeb3);

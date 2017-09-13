@@ -15,12 +15,14 @@ export interface HexPost {
   title: string;
   content: string[];
   author: string;
+  id: number;
 }
 
 export interface Post {
   title: string;
   content: string;
   author: string;
+  id: number;
 }
 
 export interface Props {
