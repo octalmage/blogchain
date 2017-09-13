@@ -274,6 +274,11 @@ module.exports = {
         // https://github.com/mishoo/UglifyJS2/issues/2011
         comparisons: false,
       },
+      mangle: {
+        except: [
+          'HttpProvider', // Needed for canAddBlogPost.
+        ],
+      },
       output: {
         comments: false,
         // Turned on because emoji and regex is not minified properly using default
