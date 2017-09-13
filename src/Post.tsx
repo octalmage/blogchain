@@ -18,7 +18,7 @@ const Post = (props: { post: PostInterface }) => (
     <div className="row">
       <div className="col-xs-8 col-xs-offset-2">
         <div className="PostContent">
-          <ReactMarkdown source={props.post.content} />
+          <ReactMarkdown escapeHtml skipHtml source={props.post.content} />
         </div>
       </div>
     </div>
